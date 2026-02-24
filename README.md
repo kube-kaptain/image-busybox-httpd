@@ -18,10 +18,12 @@ Minus:
 2. Manual release - nope
 3. Development - nope - go contribute to his upstream since it has the best exposure.
 
-Note:
+Notes:
 
 If you want to use the `kaptain` auto build/release version, see the package section
 for this repo and use that image. Otherwise the instructions below are still useful :-)
+
+If you do use the `kaptain` version be aware that the port is different. Ahem.
 
 
 ## Florin Lipan's Original README.md Partial
