@@ -1,4 +1,30 @@
-# docker-static-website
+# Image BusyBox HTTPD
+
+This is a `kaptain` style fork of @lipanski's [docker-static-website](https://github.com/lipanski/docker-static-website) project.
+
+Changes:
+
+* kaptain build and structure
+* updated alpine version
+* updated busybox version
+* removed empty file in favour of touch
+
+
+## Changes to Florin Lipan's Original README.md
+
+Minus:
+
+1. Manual build - nope
+2. Manual release - nope
+3. Development - nope - go contribute to his upstream since it has the best exposure.
+
+Note:
+
+If you want to use the `kaptain` auto build/release version, see the package section
+for this repo and use that image. Otherwise the instructions below are still useful :-)
+
+
+## Florin Lipan's Original README.md Partial
 
 [![docker:lipanski/docker-static-website](https://img.shields.io/docker/v/lipanski/docker-static-website?logo=docker&label=lipanski%2Fdocker-static-website)](https://hub.docker.com/r/lipanski/docker-static-website/tags)
 
@@ -132,51 +158,3 @@ services:
 Make sure to change `/some/local/path` to the path to your static files. Include an empty or valid `httpd.conf` file.
 
 If you use Podman, consider appending the `Z` option to volumes for SELinux labels to apply.
-
-## Development
-
-Clone the [busybox repo](https://git.busybox.net/busybox/tree) and create a blank config:
-
-```
-make allnoconfig
-```
-
-Copy the resulting `.config` to this project, diff it against the old one and re-enable everything that seems reasonable (mostly the `HTTPD` features).
-
-Uncomment the `COPY . .` line in the `Dockerfile`, add a dummy `index.html` and build a test image:
-
-```
-docker build -t docker-static-website-test .
-```
-
-Then run it:
-
-```
-docker run -it --rm --init -p 3000:3000 docker-static-website-test
-```
-
-Browse to `http://localhost:3000` and check that the contents of the `index.html` file were rendered correctly.
-
-## Release
-
-Images are build automatically by Github Actions whenever a new tag is pushed:
-
-```
-git tag 1.2.3
-git push --tags
-```
-
-### Manual process
-
-Build the image:
-
-```
-docker build -t lipanski/docker-static-website:1.2.3 -t lipanski/docker-static-website:latest .
-```
-
-Push the image to Docker Hub:
-
-```
-docker push lipanski/docker-static-website:1.2.3
-docker push lipanski/docker-static-website:latest
-```
