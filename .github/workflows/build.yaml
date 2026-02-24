@@ -1,0 +1,26 @@
+name: Docker Build Dockerfile
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    uses: kube-kaptain/buildon-github-actions/.github/workflows/docker-build-dockerfile.yaml@1.0.66
+    permissions:
+      contents: write
+      packages: write
+      checks: write
+    with:
+      dockerfile-squash: false # No point, from scratch and inherently minimal
+      qc-block-slash-containing-branches: true
+      qc-block-conventional-commits: true
+      tag-version-max-parts: 4
+      tag-version-prefix-parts: 3
+      tag-version-calculation-strategy: 'file-pattern-match'
+      tag-version-pattern-type: 'custom'
+      tag-version-source-sub-path: 'src/docker'
+      tag-version-source-file-name: 'Dockerfile'
+      tag-version-source-custom-pattern: '^ARG BUSYBOX_VERSION="([0-9]+\.[0-9]+\.[0-9]+)"$'
