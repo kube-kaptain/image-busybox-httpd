@@ -14,7 +14,7 @@ jobs:
       packages: write
       checks: write
     with:
-      dockerfile-squash: false # No point, from scratch and inherently minimal
+      dockerfile-squash: no # No point, from scratch and inherently minimal
       qc-block-slash-containing-branches: true
       qc-block-conventional-commits: true
       tag-version-max-parts: 4
