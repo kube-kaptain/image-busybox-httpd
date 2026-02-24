@@ -7,8 +7,7 @@ Changes:
 * kaptain build and structure
 * updated alpine version
 * updated busybox version
-* removed empty file in favour of touch
-
+* port number default
 
 ## Changes to Florin Lipan's Original README.md
 
