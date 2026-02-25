@@ -8,6 +8,8 @@ Changes:
 * updated alpine version
 * updated busybox version
 * port number default
+* multi-arch kaptain build (arm64 and amd64)
+
 
 ## Changes to Florin Lipan's Original README.md
 
