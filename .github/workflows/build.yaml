@@ -8,22 +8,8 @@ on:
 
 jobs:
   build:
-    uses: kube-kaptain/buildon-github-actions/.github/workflows/docker-build-dockerfile.yaml@1.0.67
+    uses: kube-kaptain/buildon-github-actions/.github/workflows/docker-build-dockerfile.yaml@1.1.1
     permissions:
       contents: write
       packages: write
       checks: write
-    with:
-      dockerfile-squash: no # No point, from scratch and inherently minimal
-      docker-platform: 'linux/amd64,linux/arm64'
-      dockerfile-sub-path-linux-amd64: "src/docker"
-      dockerfile-sub-path-linux-arm64: "src/docker"
-      qc-block-slash-containing-branches: true
-      qc-block-conventional-commits: true
-      tag-version-max-parts: 4
-      tag-version-prefix-parts: 3
-      tag-version-calculation-strategy: 'file-pattern-match'
-      tag-version-pattern-type: 'custom'
-      tag-version-source-sub-path: 'src/docker'
-      tag-version-source-file-name: 'Dockerfile'
-      tag-version-source-custom-pattern: '^ARG BUSYBOX_VERSION=([0-9]+\.[0-9]+\.[0-9]+)$'
