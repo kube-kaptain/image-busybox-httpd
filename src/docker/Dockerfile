@@ -1,8 +1,8 @@
-ARG ALPINE_VERSION=3.23.3
+ARG ALPINE_VERSION=3.24.1
 
 FROM alpine:${ALPINE_VERSION} AS builder
 
-ARG BUSYBOX_VERSION=1.37.0
+ARG BUSYBOX_VERSION=1.38.0
 
 # Install all dependencies required for compiling busybox
 RUN apk add gcc musl-dev make perl
@@ -36,5 +36,7 @@ COPY --from=builder /busybox/busybox_HTTPD /busybox-httpd
 USER static
 WORKDIR /home/static
 
+# Keep this EXPOSE and the CMD 5th arg in sync
+EXPOSE 4242
 # Run busybox httpd
 CMD ["/busybox-httpd", "-f", "-v", "-p", "4242"]
