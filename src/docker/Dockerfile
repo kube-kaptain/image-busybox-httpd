@@ -36,5 +36,7 @@ COPY --from=builder /busybox/busybox_HTTPD /busybox-httpd
 USER static
 WORKDIR /home/static
 
+# Keep this EXPOSE and the CMD 5th arg in sync
+EXPOSE 4242
 # Run busybox httpd
 CMD ["/busybox-httpd", "-f", "-v", "-p", "4242"]
