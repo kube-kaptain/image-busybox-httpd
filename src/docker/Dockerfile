@@ -1,4 +1,6 @@
+# Shared by both stages below
 ARG ALPINE_VERSION=3.24.1
+ARG STATIC_USER_ID=4242
 
 FROM alpine:${ALPINE_VERSION} AS builder
 
@@ -21,19 +23,22 @@ COPY .config .
 RUN make && ./make_single_applets.sh
 
 # Create a non-root user to own the files and run our server
-RUN adduser -D static
+ARG STATIC_USER_ID
+RUN adduser -D -u ${STATIC_USER_ID} static
 
 # Switch to the scratch image
 FROM scratch
 
-# Copy over the user
+# Copy over the user and its group
 COPY --from=builder /etc/passwd /etc/passwd
+COPY --from=builder /etc/group /etc/group
 
 # Copy the static binary
 COPY --from=builder /busybox/busybox_HTTPD /busybox-httpd
 
 # Use our non-root user
-USER static
+ARG STATIC_USER_ID
+USER ${STATIC_USER_ID}
 WORKDIR /home/static
 
 # Keep this EXPOSE and the CMD 5th arg in sync
